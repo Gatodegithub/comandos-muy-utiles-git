@@ -1,0 +1,56 @@
+---cambiar de rama manteniendo los cambios (posicionado en la rama)---
+* git switch -c <nueva-rama-nombre>
+
+---subir rama local a repositorio remoto---
+* git push -u <<remote(origin)>> <<branch>>
+
+---borrar rama local---
+* git branch -D <<branch>>
+
+---ver repositorios remotos---
+* git remote
+
+---guardar cambios en stash---
+* git stash
+
+---sacar cambios del stash---
+* git stash pop
+
+---nueva rama a partir de otra y cambiarse al instante, con track la vinculo si la rama es remota---
+* git checkout -b <<new-branch>> --track <<origin/branch-de-la-cual-parte>>
+
+---merge ramas (posicionado en la rama a la cual quiero hacer un merge)---
+* git merge develop
+
+---cambiar nombre a rama---
+* git branch -M <<new-name>>
+
+---borra rama remota de git---
+* git push <<remote-name>> --delete <<branch-name>>
+
+---modifica el comentario del ultimo commit---
+* git commit --amend -m "Modificando el comentario del ultimo commit"
+	git push -f
+
+---borrar todos los cambios y dejar igual al ultimo commit---
+* git checkout -- .
+
+
+**********************
+*********TAGS*********
+**********************
+
+---ver todos los tags---
+* git tag -n99
+
+---añadir etiquera (parado en el commit que quiero etiquetar)
+* git tag -a <etiqueta> -m <comentario>
+
+---subir a remoto---
+* git push origin <etiqueta>
+
+---eliminar etiqueta (local)---
+* git tag -d <etiqueta>
+
+---eliminar etiqueta (remota)---
+* git push origin :refs/tags/<etiqueta>     <- no lo he probado
