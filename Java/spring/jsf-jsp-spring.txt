@@ -1,0 +1,21 @@
+JSP:
+
+.Era el framework para la generación de páginas web anterior a que se definiera JSF.
+
+.Se basa en generar un fichero .jsp que es "traducido" a una clase Servlet que a su vez es compilada y ejecutada.
+
+.Hay dos versiones: con scriptlets (<% %>) que se considera obsoleta, o con la Java Standard Template Library (JSTL). La última implementa el MVC, mientras que con la primera normalmente todo el código va en el propio JSP.
+
+JSF:
+
+.Es un framework para la generación de páginas web dentro de una aplicación web. Sigue la filosofía MVC.
+
+.Tiene dos "modos": usando JSP o Facelets. Inicialmente se usaban JSPs, pero a partir de la versión 1.2 por defecto se usan Facelets (componentes XML). Normalmente se confunde "JSF" por "Facelets" (si buscas "componentes JSF" encontrarás librerías de Facelets).
+
+.Estandariza cuestiones como navegación entre páginas y la internacionalización de recursos que en JSP simplemente no estaban definidas.
+
+Spring:
+
+.Es un stack alternativo a Java EE. Como tal, proporciona una serie de servicios similares a los del stack (por ejemplo autenticación y seguridad, ORM/acceso a datasources, etc.).
+
+.No reemplaza completamente el stack; por ejemplo es muy común integrar una capa web JSP o JSF con una base Spring, o usar componentes del stack (como la API de Validation) dentro de Spring o viceversa (usar Hibernate en vez de JPA dentro de una aplicación Java EE).

@@ -1,0 +1,72 @@
+Cuando creamos una aplicacion y compilamos estas quedan dentro de un package, en spring boot pueden ser de dos tipos: JAR (simplemente es un archivo de java), o WAR (Archivo web de java).
+En spring boot por defecto viene incluido un servidor tomcat que permite hacer deploy en jar o war.
+Cuando pensamos en un servidor externo si o si debe ser empaquetado war, cuando es embebido podemos usar jar.
+Usamos war si necesitamos realizar el despliegue en un servidor externo como un jboss, glassfish, wildfly, WAS etc... pero si utilizamos el servidor que se incluye en spring boot lo dejamos en jar, más optimizado y portable. 
+
+Al usar tomcat embebido del proyecto, por lo menos para el proceso de desarrollo te evitas la configuración del server. Lo cual ya llevas una ventaja. Por otra parte, creo que para responder tu pregunta, una cosa es el servidor (la maquina) y otra es el servidor de aplicaciones (como jboss o tomcat). Cuando alquilas o tienes localmente un servidor (la maquina) puedes levantar el spring-boot con tomcat embebido como el ejemplo de la consola que hizo el profe 2 o 3 clases atrás. Así podrías subir un "servidor" embebido a un "servidor" en un proyecto xD Espero haber ayudado un poco. Saludos
+
+
+
+.\mvnw.cmd package    -> para compilar el proyecto con maven y contruir el archivo jar, ejecuto el script de maven wrapper, lo descarga y 			lo instala de forma automatica.
+
+java -jar .\target\spring-boot-web-0.0.1-SNAPSHOT.jar   -> Una vez se crea el archivo jar, lo ejecuto con java -jar, y la ubicación del 							archivo jar. De esta manera inicio el servidor.
+
+
+Scope de los componentes: Los componentes por defecto son del tipo singleton, mantiene en el contedor de spring una sola instancia de ese componente por defecto. Se aplica a los controladores tambien @Controller, @Component.
+@SessionScope, @ApplicationScope.
+
+@Service, @Controller, @Component son anotaciones que tambien sirven para registrar la clase en el contenedor de spring.
+service y component es algo conceptual hacen lo mismo, pero distinto nombre.
+
+
+
+Interceptores HTTP
+
+.Los interceptores son útiles cuando se requiere aplicar una funcionalidad específica para ciertas peticiones
+http y es transversal a nuestra aplicación.
+Es decir son fragmentos de código reutilizables que interceptan un método del controlador para agregar funcionalidad antes
+o después. Se aplican en los metodos del controlador. (varios controladores o varios metodos)
+
+
+
+JPA - api persistencia java
+
+.Es una especificacion de persistencia, propone como se debe implementar un ORM estandar en java.
+
+
+
+Hibernate - spring usa hibernate por defecto como proveedor de jpa
+
+.Un Proveedor, es un framework que implementa el estandar jpa.
+
+
+
+DAO - data access object
+
+.Clase acceso a datos DAO, clase de persistencia que se encarga de acceder a los datos. 
+
+
+
+@RequestParam es para obtener parámetros de la URL de una petición GET (parámetros de la url del tipo query, ejemplo ?param=valor&param2=valor2) o POST (input del formulario cuando ejecutas un submit).
+
+Mientras que @PathVariable solo para obtener los valores de parámetros de la ruta (route), ejemplo /url/valor1/valor2
+
+
+
+@Transactional
+Ahora respecto a @Transactional, la puedes usar tanto en el dao como si usas service en el service, permite envolver al método bajo una misma transacción de base de datos con begin, commit y rollback.
+
+Maneja las transacciones en las base de datos, commit y rollback, dos conceptos propios de motores de bases de datos transaccionales:
+El commit en SQL se utiliza para confirmar de forma permanentes los cambios realizadas en una transacción. Mientras que el rollback o reversión es una operación que devuelve los datos de la base de datos a algún estado previo del commit. Los rollbacks son importantes para la integridad de la base de datos, generalmente el rollback se ejecuta cuando se produce un error o fallo en la transacción y commit! por lo tanto todo cambio que se haya realizado en esa transacción regresa a su estado anterior.
+Estos los maneja spring data jpa de forma interna mediante estas anotaciones, además nos permite configurar que operaciones son de lectura y/o escritura.
+
+
+
+@Service
+Una clase Service, no es más que una clase que presta servicio de lógica de negocio al controlador, el 99% de las veces son clases que contienen como atributos los objetos DAOs para realizar consultas y operaciones con JPA.
+
+Entonces, qué es lo que hace, realizar operaciones y select a la base de datos, usando los objetos dao.
+
+Esto permite centralizar en una única clase o fachada varios Dao que pueden trabajar en conjunto bajo la misma transacción realizando varias consultas u operaciones de diferentes DAO en un solo método del service o de forma independiente. Así evitamos ensuciar el controlador con múltiples accesos a DAO.
+
+Más que nada es un patron de diseño que desacopla el Dao del controlador y lo deja en una clase más especializada, pero es opcional, igual puedes usar los Daos directamente en el controlador, pero si estás trabajando con muchos Dao puede tornarse un poco desordenado.

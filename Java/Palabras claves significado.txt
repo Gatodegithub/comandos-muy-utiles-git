@@ -1,0 +1,21 @@
+--POO--
+Static: Pertenece a la clase, un atributo o metodo estatico es compartido por todas las instancias de esa clase. Se pueden importar
+
+Final: Es constante, no puede ser sobre escrito por herencia. Tambien es para evitar la herencia, si colocamos final en la clase evitamos que esa clase tenga herederos, y si colocamos el final en un metodo es para evitar q el metodo se sobre escriba en alguna clase hija.
+
+Protected: Solo puede ser accedido por clases dentro del paquete y por clases que la heredan
+
+private: Solo puede ser accedido dentro de la misma clase
+
+public: Desde cualquier clase y paquete
+
+default (lo mismo que no poner modificador de acceso): Solo puede ser accedida dentro del paquete
+
+
+Lambda: Es una interface funcional y tiene que cumplir la condición de que tenga solo un metodo abstracto.
+
+composicion: una clase se compone de otra como propiedad.
+
+
+
+Si hago una copia de un proyecto debo cambiar sus datos del pom.xml, group id, artifactid, name ..

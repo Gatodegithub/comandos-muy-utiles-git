@@ -1,0 +1,192 @@
+JRE: maquina virtual de java, es para ejecutar o correr aplicaciones. No para desarrollar, compilar.
+
+Transacciones: Una transacción es un conjunto de operaciones sobre una base de datos que se deben ejecutar como una unidad. Hay ocasiones en las que es necesario que varias operaciones sobre la base de datos se realicen en bloque, es decir, que se ejecuten o todas o ninguna, pero no que se realicen unas sí y otras no.
+
+Jar: Es un archivo comprimido de java, empaqueta nuestra aplicación con el codigo compilado para produccion.
+
+War: Es parecido al jar pero se refiere a un archivo web para desplegar en un servidor como tomcat o de aplicaciones.
+
+javac: es el comandos para usar el compilador, ej: javac ArgumentosLineaComando.java -encoding utf8 (para q funcionen los tildes)
+
+java: es el comando runtime para ejecutar nuestra aplicación, el comando se ejecuta desde la carpeta src y se incluyen los paquetes
+	EJ: java linea_comandos.ArgumentosLineaComando
+
+Clases genericas: son clases padre que son heredadas por varias hijas o concretas, típicamente abstracta.
+
+bytecode: El bytecode Java se encuentra dentro del archivo de extensión .class y es el tipo de instrucciones que la máquina virtual Java espera recibir para posteriormente ser compiladas a lenguaje de máquina mediante un compilador JIT a la hora de su ejecución.
+
+jdk: Es el ambiente para escribir codigo, para desarrollar, cuenta con todo el core, clases, librerias, paquetes para escribir nuestras aplicaciones en java. Es el kit de herramientas para desarrollar en java.
+
+Para comparar variables primitivas se hace por valor, ej: int x == int y , pero para comparar objetos se hace por referencia. se
+podria usar el metodo equals.
+
+
+Clases: Siempre inician en mayuscula, ej: HolaMundo. y debe tener el mismo nombre que la clase. (public class HolaMundo{})
+
+
+public : Es un modificador de acceso que indica que este metodo o clase se puede llamar o ejecutar desde cualquier parte de la app
+
+void : significa que el metodo no retornada nada.
+
+static:  En el caso de un método estático, no necesitamos crear un objeto para llamar al método. Podemos llamar al método “static” usando el nombre de la clase.
+
+sobrecarga : Se refiere a la posiblidad de tener dos o mas metodos con el mismo nombre pero con funcionalidad diferente.
+
+Concurrencia: Concurrencia se da cuando dos o más tareas se desarrollan en el mismo intervalo de tiempo, pero que no necesariamente están progresando en el mismo instante. Es un concepto más general que el PARALELISMO, el cual consiste en llevar a cabo multitareas en el mismo instante literalmente
+
+Tipos de datos
+--------------
+Primitivos: CADA PRIMITIVO TIENE SU CLASE EQUIVALENTE.
+	
+	Contienen un solo valor, no es un objeto ni instancia. 
+		boolean a = true - false
+		char a = "R"
+
+	Numeros enteros----
+		byte enteroByte = 127;  //entre -128 a 127
+		short enteroShort = 32767;  //entre -32768 a 32767
+		int enteroInt = 2147483647; //entre -2147483648 a 2147483647
+		long enteroLong = 9223372036854775807L; // entre -9223372036854775808 a 9223372036854775807
+
+	Numeros reales-----
+		float realFloat = 3.1416f;
+		double realDouble = 4.7029235E3;
+
+
+referencia: hace referencia a clases como Integer, String ...
+
+Nombre de variables: inician con minuscula, ej: diasTotales.
+
+cast: forzar la conversión entre primitivos DEL MISMO TIPO. ej: int, short, long, float son del tipo Integer
+
+
+***********************************************************
+Operadores: PPT en el curso.
+	Aritmeticos: *, /, %, -, ++, --, -
+
+Operatores combinados o compuestos: -=, +=, /=, *=. etcs...
+
+Operador incremento y decremento: esta el pre y post. Se pueden colocar tanto antes como despues pero solo devuelven el valor modificado si estan delante.
+	++a  -> Pre-Incremento incrementa a uno, y luego devuelve a
+	a++  -> post-incremento devuelve a, y luego incrementa en uno
+	-aa
+	a--
+ 
+Operador ternario
+	int a = 2 > 3 ? 1 : 2;
+
+Operadores relacionales: >, >=, <, <=, ==, !=
+
+Operadores logicos: &&, ||, !, &, |, ^.
+
+
+
+
+**************************Clases de envoltorio o Wrapper*********************************
+
+. Cada tipo primitivo tiene su equivalente en un tipo de referencia o clase
+. Dan mayor funcionalidad para operaciones de comprobaciones y conversiones
+
+
+
+***************POO****************
+Una clase public puede ser accedida desde cualquier package, es decir desde cualquier parte de la aplicación, sin public es default, solo dentro del package.
+
+Atributos y metodos STATIC de la clase: Le pertenece a la clase, es compartido por cualquier objeto de esa clase, si algun objeto modifica este valor estatico, se modificara tambien para el resto. Es compartido por todas las instancias de la clase. Siempre un atributo statico debe ir de la mano con otros get o set estaticos. En un metodo estatico solo podremos trabajar con atributos estaticos.
+
+Final : Es constante, no puede ser modificado. Se escriben en mayuscula y separadas por _. Si una clase es final significa que no puede tener desendencia. No puede tener herencia. Los metodos que tengan final no se pueden sobre escribir
+
+Paquetes: Contenedores que nos permiten agrupar nuestras clases, para organizar. Evitan conflictos de nombres entre clases. Segun sus modificadores podrian ocultar el acceso a sus clases. Deben estar escrito completamente en minúscula y los subpackage se separan con un punto.
+import static com.guzman.datos.Persona.saludar;  <- importo el metodo estatico para poder usarlo en esta clase como si fuera propios
+import com.guzman.datos.*  <- importar todas las clases del paquete
+Si quiero importar dos clases con el mismo nombre solo puedo importar una de ellas y la otra deberia hacerlo asi:
+com.aguzman.otro.Persona persona2 = new com.aguzman.otro.Persona();
+src es nuestro paquete base en intellij no sé en otros.
+
+Modificadores de acceso: si una clase es default, solo puede ser usada dentro del paquete, si es public puede ser usada en otros paquetes.
+protected: las clases que estan dentro del mismo paquete y tambien las clases hijas que heredan de esta clase que tiene los atributos y metodos protected.
+private: Solo se puede acceder a estos metodos, atributos en la misma clase.
+
+
+
+
+Alta cohesion y bajo acoplamiento:
+Inyeccion de dependencias: 
+-----------------------------------
+**El acoplamiento es la forma y nivel de interdependencia entre las clases, una medida de qué tan cercanamente conectados están dos clases de java, relaciones de objetos, es mucho mejor que el tipo de dato de los objetos relacionados sea lo mas genrico y abstracto posible y no un tipo concreto, ideal calses abstractas o interfaces, eso logra un bajo acoplamiento a una implementacion concreta en particular.
+
+La cohesión se refiere al grado en que los elementos de una clase permanecen relacionados. Por lo tanto, la cohesión mide la fuerza de la relación entre las piezas de funcionalidad dentro de una clase. Por ejemplo que una clase esta formado por varios otros objetos y estos son parte de su estructura y atributos.
+
+Inyección de dependencia: El objetivo es lograr un bajo acoplamiento entre los objetos de nuestra aplicación. Con este patrón de diseño, los objetos no crean o buscan sus dependencias (objetos con los cuales colabora) sino que éstas son proporcionadas o inyectadas al objeto, por ejemplo inyectar objetos a una clase (POJO) que tiene dependencias, en lugar de ser ella misma sea quien las instancie. El contenedor (la entidad que coordina cada objeto en el sistema) es el encargado de realizar este trabajo al momento de instanciar el objeto. Se invierte la responsabilidad en cuanto a la manera en que un objeto obtiene la referencia a otro objeto.
+
+De esta manera, los objetos conocen sus dependencias por su interfaz (bajo acoplamiento). Así la dependencia puede ser intercambiada por distintas implementaciones a través del contenedor. En resumen, lo ideal es que programar orientado a interfaces e inyectar las implementaciones a través del contenedor.**
+
+
+
+
+******POO HERENCIA*******
+Una clase solo puede heredar de una sola clase.
+Cuando una clase hereda de otra tambien es del tipo del padre, y clases que heredan de la misma clase se pueden hacer cast entre ellas.
+
+
+
+--CLASES ABSTRACTAS--
+Representa siempre una clase padre de la cual tenemos que extender, no se deberia crear una instancia de estas clases, si no que la instancias se crean a partir de las clases hijas que extienden de la clase abstracta, una clase abstracta debe tener metodos que tambien son abstractos, es decir, metodos que no tienen una implementación especifica, ya que se puede implementar de distinta forma segun la clase hija, cada hija sobre escribira este metodo con una implementacion unica y particular de cada uno.
+
+
+--INTERFACES--
+Una interfaz es una colección de metodos abstractos (sin implementar) y de valores constantes que puede realizar un objeto determinado.
+Una interfaz es como una clase abstracta pero no permite que ninguno de sus métodos esté implementado.
+Capturar similitudes entre clases no relacionadas sin forzar una relación entre ellas.
+Es decir definen comportamientos que una o varias clases necesitan implementar.
+Es un tipo de referencia, puede utilizarse como tipo de dato del objeto (argumento de metodos y una declaracion de variables)
+
+
+
+
+
+****** API COLLECTION ******
+La collection es un API para agrupacion de objetos, consta de tres tipos: List, Set y map, siempre con alguna 	regla que se les puede aplicar. No hay que preocuparse del tamaño a diferencia del array
+
+.Una List almacenara objetos en una secuencia determinada.
+.Un Set no permitirá elementos duplicados y no mantiene el orden de sus elementos.
+.Los Map almacenan información en base a parejas de llaves y valores.
+
+
+
+****** API STREAM ******
+Combina las mejores ideas del Iterator y la programación funcional para implementar flujos de datos
+
+.Filter y Map -> son inmutables, retornan una nueva instancia del Stream
+
+
+Se debe terminar solo con un operador final.
+
+
+
+******** ANOTACIONES ********
+Es muy parecida a una interface, nos permite agregar/modificar metadata o configuraciones a nuestra clase. (Java 5)
+
+
+****** PATRONES DE DISEÑO ******
+Son algoritmos que permiten resolver un problema cotidiano, que se repite una y otra vez en el desarrollo de nuestras aplicaciones, son orientados a objetos.
+
+
+Hay 3 categorias: Patrones creacionales, estructurales y de comportamiento.
+
+Singleton (creacional): permite crear una sola instancia de una clase. Tipicamente se usa en bd para reutilizar la misma conexion durante y a lo ancho de nuestra aplicación.
+
+Abstract Factory (creacional): 
+
+
+****** API JDBC ******
+Sentencias DML Sql : Data Manipulation Language, lenaguaje declarativo para manipular la bd
+
+Sentencias DDL Sql : Data Definition Language, lenguaje que se escarga de la definicion y modificacion de la estructura de las tablas e integridad referencial, para modificar, borrar o definir las tablas, columnas, relaciones, reglas. (Create, ALTER, DROP Y TRUNCATE)
+
+Trucante: para limpiar la tabla, eliminar todos los datos y la sequencia del id lo deja en 0
+
+
+Cada gestor de base de datos requiere un driver distinto
+
+

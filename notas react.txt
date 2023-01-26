@@ -1,0 +1,186 @@
+ctrl + D -> selecciono las cohincidencias de lo que quiero cambiar
+alt + shift + flechas -> duplicar linea 
+
+Frontend es la parte de un sitio web que interactúa con los usuarios, por eso decimos que está del
+lado del cliente. Backend es la parte que se conecta con la base de datos y el servidor que utiliza 
+dicho sitio web, por eso decimos que el backend corre del lado del servidor.
+
+
+Cuando visualiza una página web en su navegador, está realizando una solicitud a otro equipo en Internet, 
+que a continuación proporciona la página web como respuesta. Esa computadora con la que está hablando a 
+través de Internet es un servidor web. Un servidor web recibe solicitudes HTTP de un cliente, 
+como su navegador, y proporciona una respuesta HTTP, como una página HTML o JSON desde una API.
+
+------EN REACT JS----------------
+°puedo crear un objeto con las propiedades que recibe el componente, y ese objeto pasarlo en el jsx.
+°RECUERDA utilizar siempre los hooks de react, siempre piensa en resolver el problema con los hooks!
+°Use state, sirve para validar, estados y todo lo que se te ocurrra!!
+°No se ejecuta una funcion al declararla como variable, las funciones solo se ejecutan al 
+momento de llamarlas () o si es una funcion auto invocada al momento de declararlas.
+Los addEventListener que reciben una funcion tampoco se ejecutan al declararlas !!!!! SON FUNCIONES, 
+SOLO SE EJECUTAN AL LLAMARLAS.
+°El return de useEffect se ejecuta cada vez que cambia la variable.
+°Para añadir estilos a componentes <style>
+  				{`.ClaseIconos{
+    				  height: 32px;
+    				  width: 32px;
+    				  margin: 0 16px;
+  				 }`}
+				</style>
+
+°Si una funcion devuelve una promesa (fetch tambien), puedo continuar con un .then() al llamar a la funcion.
+°RECUERDA que cada API tiene su forma de construirse y sus particularidades.
+°Lo recomendable para guardar los valores de un formulario es crear un objeto inicial, el cual se guardara
+en la variable de estado, este tendra como propiedades los valores que se reciben del formulario.
+°Las cookies se envian en el header de las peticiones http, por lo general desde el backend
+°El archivo css o scss para usarlo como objeto debe llamarse module.css o module.scss
+°mapas de bits: imagenes jpeg, png
+°Los unicode se pueden usar en el html pero anteponiendo: &#xUNICODE , debe estar dentro de un i con la clase: 'fa'.
+Tambien puedo usarlos en el css con pseudoelementos, debo usar atributos: font-family: "Font Awesome 5 Free";
+font-weight: 900;  content: "\f0b2";
+°.list {&.item} >> sass el selector que tenga la clase list y item
+°Cuando le agrego un evento a un elemento padre, ese evento se propagara a los hijos (example modal jon react), 
+por lo tanto si quiero que un elemento hijo detenga la propagacion: const handleModalContainerClick = e => e.stopPropagation();
+°Set elimina duplicados, devuelve un objeto
+°Los iconos importados import * as icons from '../../Atoms/Icons', los trato como componentes:
+<icons.Archive className={'ClaseIconos'}/>
+°Los atributos de un svg deben estas escritos de la manera que acepta react o no funcionara el svg.
+°refBtn.current.contains(target) <- devuelve un valor Boolean indicando si un nodo es descendiente de un nodo dado o no
+°Si quiero mandar una imagen desde un json o obj, debo poner 'img': require('../../images/svg-1.svg').default;
+°rel="noopener noreferrer"  -> debo ponerlo a los links que redirigan a una nueva ventana con _blank para evitar vulnerabilidad
+°Puedo crear un componente tipo helper ->
+
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+
+export default function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0,0)
+  }, [pathname])
+
+  return null;
+}
+
+Si lo quiero ejecutar lo importo y coloco sobre los demas componentes  <ScrollToTop /> ej: styled components projects
+
+°La carpeta PUBLIC, es para archivos estaticos, puedo llamar a esos archivos de forma ABSOLUTA, ej:
+background: url('/HeaderBackground.svg'); <- estoy llamando al svg que esta en public desde otro archivo, sin importarlo
+
+°Saber tamaño pantalla con js: 
+const showButton = () => {
+    if(window.innerWidth <= 960) {
+      setButton(false);
+    } else {
+      setButton(true);
+    }
+  }
+
+°Puedo guardar componentes dentro de un array!!!
+°Puedo renderizar {} componentes que estan en un array, colocando la variable. ej : {slides} <- array con componentes
+
+
+
+
+---NEXT JS FEATURES----
+PRE-RENDER: De forma predeterminada, Next.js pre-renderiza previamente cada página. Esto significa que Next.js 
+genera HTML para cada página por adelantado, en lugar de hacerlo todo con JavaScript del lado del cliente.
+el js se encarga de la interacion en la pagina, y no de crear el dom como lo hace react app
+El renderizado previo puede resultar en un mejor rendimiento y SEO.
+
+2 tipos de pre-render: 
+1. Static generation
+	El html con todos los datos que componen el contenido de la pagina web son generados por avanzado
+	cuando hago build de mi aplicación, este metodo es el mas recomendado para pre renderizar paginas
+	siempre que sea posible. por que la pagina puede ser construida una vez, se almacena en cache
+	por un cdn y es servida al cliente casi instantaneamente.
+	
+	Si navego directamente a una pagina de una ruta, el html es servido.
+	Pero si navego a una pagina de una ruta desde una de diferente ruta por <Link />, el componente que use 
+	los datos del json es creado 
+	en el lado del cliente usando javascript y el JSON ya traido desde el servidor. (no hay peticiones
+	adicionales al servidor ya que se descargaron los archivos al momento de entrar a la pagina que
+	contiene el link hacia las otras paginas de ruta)
+
+2. Server-side rendering
+
+getStaticProps:
+	1. Runs only on the server side, los console.log dentro de esta funcion se mostraran en la consola del server
+	2. La funcion nunca correra en el lado del cliente.
+	3. El codigo escrito aqui NO SERA INCLUIDO en el js bundle que es enviado al navegador.
+	4. puedo escribir codigo del lado del servidor en getStaticProps, codigo que utilizo en node.js
+	como acceder a los archivos del sistema usando fs module o hacer consultas a la bd.
+	5. No tengo que preocuparme sobre incluir api keys dentro de esta funcion ya que tampoco llegara
+	al navegador.
+	6. Esta funcion solo puede ser usada en una pagina.
+	7. Se ejecuta al momento de la compilación, pero durante desarrollo se ejecuta cuando corro run dev
+	y cada vez que realizo un cambio.
+
+HIDRATACIÓN: Cada HTML generado está asociado con un código JavaScript mínimo necesario para esa página. 
+Cuando el navegador carga una página, su código JavaScript se ejecuta y hace que la página sea completamente interactiva. 
+(Este proceso se llama hidratación y ES LO QUE HACE REACT, EL CLIENTE SOLO RECIBE LA ETIQUETA ROOT Y EL JS 
+DE LA PAGINA SE ENCARGA DE CREAR EL DOM, POR ESO REACT ES MALO PARA EL SEO. LA PRE-RENDERIZACION LO ARREGLA).
+
+Si deshabilito javascript, veo que mi aplicacion se procesa sin js. Esto se debe a que Next.js ha renderizado previamente 
+la aplicación en HTML estático, lo que le permite ver la interfaz de usuario de la aplicación sin ejecutar JavaScript.
+
+En una aplicacion React simple, no hay renderizado previo, por lo que si deshabilito js no se vera nada. Ya que es client-Side
+Con react app, el cliente solo recibe la etiqueta <root></> y el js lo ejecuta el cliente
+
+¿Cuál de los siguientes no es un beneficio de la representación previa?
+R: Permite que su aplicación solo se ejecute en el lado del servidor 
+
+Next.js tiene dos formas de pre-renderizado, Generación estatica y renderizado del lado del servidor.
+La diferencia esta en cuando genera el html para una pagina.
+
+Static Generation: Es el método de representación previa que genera el HTML en el momento de la compilación, 
+'next build', El HTML renderizado previamente se reutiliza en cada solicitud.
+
+Server side rendering: es el método de pre renderizado que genera el HTML en cada solicitud .
+
+En el modo de desarrollo (cuando ejecuta npm run devo yarn dev), todas las páginas se procesan previamente en 
+cada solicitud, incluso para las páginas que usan la generación estática.
+
+Puedo usar paginas con pre render estatico, y otras paginas con serverside
+
+Recomendamos usar Static Generation (con y sin datos) siempre que sea posible porque su página se puede 
+construir una vez y ser servida por CDN, lo que lo hace mucho más rápido que tener un servidor que renderice 
+la página en cada solicitud.
+
+Debería preguntarse: "¿Puedo renderizar previamente esta página antes de la solicitud de un usuario?" 
+Si la respuesta es sí, entonces debe elegir Generación estática.
+
+Por otro lado, Static Generation no es una buena idea si no puede pre-renderizar una página antes de la solicitud de un 
+usuario. Tal vez su página muestre datos actualizados con frecuencia y el contenido de la página cambie 
+con cada solicitud.
+En ese caso, puede utilizar la representación del lado del servidor . Será más lento, pero la página renderizada 
+previamente siempre estará actualizada.
+
+
+Procesamiento previo y obtención de datos
+Generación estática con y sin datos
+La generación estática se puede realizar con y sin datos.
+
+Hasta ahora, todas las páginas que hemos creado no requieren la obtención de datos externos. Esas páginas se generarán automáticamente de forma estática cuando la aplicación se cree para producción.
+
+Static Generation without Data
+Sin embargo, para algunas páginas, es posible que no pueda procesar el HTML sin antes obtener algunos datos externos. Quizás necesite acceder al sistema de archivos, obtener una API externa o consultar su base de datos en el momento de la compilación. Next.js admite este caso: generación estática con datos , listos para usar .
+
+Generación estática con datos usando getStaticProps
+getStaticProps se ejecuta en el momento de la compilación en producción y ...
+Dentro de la función, puede obtener datos externos y enviarlos como accesorios a la página.
+
+También puede consultar la base de datos directamente: Esto es posible porque getStaticPropssolo se ejecuta en el 
+lado del servidor . Nunca se ejecutará en el lado del cliente. Ni siquiera se incluirá en el paquete JS para 
+el navegador. Eso significa que puede escribir código, como consultas directas a la base de datos, sin que se 
+envíen a los navegadores.
+
+Si necesita obtener datos en el momento de la solicitud en lugar de en el momento de la compilación, 
+puede probar la representación del lado del servidor 
+
+Solo debe usarlo getServerSideProps si necesita renderizar previamente una página cuyos datos deben obtenerse en el 
+momento de la solicitud. 
+
+
+Las páginas que comienzan con [y terminan con ]son rutas dinámicas en Next.js.
