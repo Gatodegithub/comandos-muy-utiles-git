@@ -1,0 +1,7 @@
+la versión se compone de <mayor>.<menor>.<revisión>
+
+Cambiamos <mayor> cuando hacemos cambios importantes, como cambio de arquitectura, modificaciones que son disruptivas respecto de la versión anterior o cambios que son muy amplios
+
+Cambiamos <menor>, con los cambios menores, por ejemplo el que acabas de hacer.
+
+Cambiamos <revisión>, cuando realizamos correcciones, por ejemplo por un mantis o un mc.
