@@ -35,6 +35,11 @@
 ---borrar todos los cambios y dejar igual al ultimo commit---
 * git checkout -- .
 
+---subir cambios a una rama remota desde una local con distinto nombre---
+* git push origin <miramalocal>:<ramaremota>
+
+---vincular mi rama local a una remota---
+*  git branch -u origin/dev
 
 **********************
 *********TAGS*********

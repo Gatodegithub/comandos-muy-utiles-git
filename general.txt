@@ -5,3 +5,5 @@ Cambiamos <mayor> cuando hacemos cambios importantes, como cambio de arquitectur
 Cambiamos <menor>, con los cambios menores, por ejemplo el que acabas de hacer.
 
 Cambiamos <revisión>, cuando realizamos correcciones, por ejemplo por un mantis o un mc.
+
+Cada vez que incremente un digito de la version los numeros que estan a la derecha pasan a ser cero, ej cambio menor: de 2.2.5 a 2.3.0
