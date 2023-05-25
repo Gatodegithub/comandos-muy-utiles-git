@@ -1,0 +1,59 @@
+******************************
+*** Validación rut chileno ***
+******************************
+import { errorsData, formData } from "./interfaces";
+
+const rutRegex = /^[0-9]+[-|‐]{1}[0-9kK]{1}$/;
+const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]*$/;
+const nameRegex = /^[A-Za-z\s]+$/;
+const numberPhoneRegex = /^(\+?56){0,1}(9)[98765]\d{7}$/;
+
+export const validator = (formData: formData): errorsData => {
+  const { dni, email, name, lastName, numberPhone } = formData;
+  
+  const result:errorsData = {"dni": true, "email": true, "name": true, "lastName": true, "numberPhone": true};
+
+  rutRegex.test(dni) && rutValidator(formData.dni) && (result.dni = false);
+  emailRegex.test(email) && (result.email = false);
+  nameRegex.test(name) && (result.name = false);
+  nameRegex.test(lastName) && (result.lastName = false);
+  numberPhoneRegex.test(numberPhone) && (result.numberPhone = false);
+
+  return result;
+}
+
+
+// VALIDADOR PARA EL NUMERO VERIFICADOR.
+const rutValidator = (completeRut: string) => {
+  const rutSplitted = completeRut.split("-");
+  let verifyDigit = rutSplitted[1];
+  const rut = rutSplitted[0];
+
+  if (verifyDigit == "k") verifyDigit = "k";
+  return verificateDigit(rut) == verifyDigit;
+}
+
+const verificateDigit = (rut: string) => {
+  let numberRut = Number(rut);
+  let M = 0;
+  let S = 1;
+  for (; numberRut; numberRut = Math.floor(numberRut / 10)) {
+    S = (S + (numberRut % 10) * (9 - (M++ % 6))) % 11;
+  }
+  return S ? S - 1 : "k";
+}
+******************************
+******************************
+******************************
+
+
+
+
+
+
+
+
+
+
+
+
